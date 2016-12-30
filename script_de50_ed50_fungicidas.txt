@@ -1,0 +1,25 @@
+>library(Rcmdr)
+>dados                           #nome do conjunto de dados, data.frame 1
+>dadosiso                        #nome do conjunto de dados, data.frame 2
+>str(dados)                      #observar organização dos dados
+>result<-by(dados,dados$isolado:dados$repeticao,function(x) lm(inib~log10(conc),dat=x)) #calcula regressão de cada isolado por repetição
+>result
+>result[[1]]                     #verificação da saída 1 somente para conferência dos valores
+>result[[2]]
+>result
+m<-360                          # número resultante da razão do total de observações por tratamentos
+saida.y<-NULL                   #
+for (i in 1:m)                  #
+{
+temp<-result[[i]]              #
+a[i]<-temp$coefficients[1]        #
+b[i]<-temp$coefficients[2]        #
+saida.y[i]<- 10^((50-a[i])/b[i])            #
+}
+saida.y
+
+
+resultDE<-saida.y
+DE50<-10^resultDE
+resultado<-cbind(dadosiso,DE50)  # organizar os dados em uma matrix
+resultado

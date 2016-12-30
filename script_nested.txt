@@ -1,0 +1,20 @@
+# *****************************************************
+# script para anova aninhada/cruzada 
+#
+# atencao: os valores de F precisam ser estimados manualmente
+# com base nos quadrados medios esperados (EMS)
+# dados referentes ao exemplo pag. 242 Kuehl 1995
+# *************************************** E.M. 07/01/10
+
+dados <- read.table('/home/mizubuti/arquivos/R_code/teste_nested_2.txt', header=TRUE)
+
+dados$conc <- as.factor(dados$conc)
+dados$day <- as.factor(dados$day)
+dados$run <- as.factor(dados$run)
+
+ 
+modelo <- aov(gluc ~ conc + day + conc*day + day/run + day/run*conc, data=dados)
+anova(modelo)
+
+
+

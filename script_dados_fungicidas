@@ -1,0 +1,16 @@
+dados <- read.table('/home/mizubuti/Desktop/de50_estrob.txt', header=TRUE)
+
+dados$isolado <- as.factor(dados$isolado)
+dados$estado <- as.factor(dados$estado)
+dados$rep <- as.factor(dados$rep)
+
+# criando objeto com medias de cada conc por cada isolado)
+medias_conc <- aggregate(dados$germ, by=list(dados$isolado, dados$conc), mean)
+
+# objeto contendo apenas valores de germ medios da testemunha 'conc == 0'
+
+medias_controle <- subset(medias_conc, Group.2==0)
+
+
+
+

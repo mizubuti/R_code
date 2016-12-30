@@ -1,0 +1,32 @@
+# ###########################################################
+# script para calculo de distancias de marcas binarias 0 ou 1
+# ############################################# E.M. 25/05/09
+
+# necessita do pacote "arules"
+# o arquivo de dados deve ser preparado com cada isolado em uma linha
+# e conter apenas 0 e 1's, separados por um espaco em branco
+# no exemplo abaixo serao analisados 5 isolados, cada um com 10 marcas
+
+library(arules)
+
+teste1 <- scan(file="/home/eduardo/arquivos/teste")
+
+# converte o objeto teste1 em matriz
+# substitua o valor correto para numero de linhas (nrow = no. de isolados) e colunas (ncol = no. de marcas)
+
+teste2 <-matrix(data=teste1, nrow=5, ncol=10, byrow=T)
+
+# calculo de dissimilaridade usando "Dice"
+dist_dice <- dissimilarity(teste2, y=NULL, method="dice")
+
+# construcao do dendrograma usando UPGMA
+dendro_upgma <- hclust(dist_dice, method="average")
+
+# visualiza
+plot(dendro_upgma, hang=-1)
+
+
+
+
+
+
